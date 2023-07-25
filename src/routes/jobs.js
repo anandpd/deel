@@ -5,7 +5,7 @@ const { getProfile } = require('../middleware/getProfile');
 
 router.get('/unpaid', getProfile, async (req, res) => {
     try {
-        const { Job, Contract, Profile } = req.app.get('models')
+        const { Job, Contract } = req.app.get('models')
         const { id: profileId } = req.profile;
 
         let activeJobs = await Job.findAll({
@@ -16,7 +16,8 @@ router.get('/unpaid', getProfile, async (req, res) => {
             include: {
                 model: Contract,
                 where: {
-                    status: "in_progress", [Op.or]: {
+                    status: "in_progress",
+                    [Op.or]: {
                         "ContractorId": profileId,
                         "ClientId": profileId
                     }
