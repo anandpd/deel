@@ -1,9 +1,6 @@
 const { sequelize } = require("../model");
 const { Op } = require("sequelize");
 
-
-
-
 module.exports.jobController = {
     getMyUnpaidJobs: async (req, res) => {
         try {
